@@ -94,13 +94,19 @@ public class PersonServiceImplTest {
 	@Test
 	public void speichern_Antipath_throwsPersonenServiceException()  {
 		try {
+			// Arrange
 			final Person person = new Person("Fritz", "Doe");
 			
 			when(antipathenMock.contains(anyString())).thenReturn(true);
 			
+			// Action
 			objectUnderTest.speichern(person);
+			
+			
 			fail("Exception expected!"); 
 		} catch (PersonServiceException e) {
+			
+			// Assertion
 			assertEquals("Antipath.", e.getMessage());
 		}
 	}
@@ -123,11 +129,26 @@ public class PersonServiceImplTest {
 	
 	@Test
 	public void speichern_HappyDay_PersonSavedInPersistenceLayer() throws Exception{
+		
+		
+		
 		final Person person = new Person("John", "Doe");
 		when(antipathenMock.contains(anyString())).thenReturn(false);
 		objectUnderTest.speichern(person);
+		
 		verify(personRepositoryMock).save(person);
+		assertNotNull(person.getId());
+		assertEquals(36, person.getId().length());
 	}
-
+	
+//	@Test
+//	public void speichern_HappyDay_personIDIsSet()  throws Exception{
+//		final Person person = new Person("John", "Doe");
+//		when(antipathenMock.contains(anyString())).thenReturn(false);
+//		objectUnderTest.speichern(person);
+//		assertNotNull(person.getId());
+//		assertEquals(36, person.getId().length());
+//	}
+//
 }
  

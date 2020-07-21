@@ -1,6 +1,7 @@
 package de.gothaer.PersonDemo.business;
 
 import java.util.List;
+import java.util.UUID;
 
 import de.gothaer.PersonDemo.Persistence.PersonRepository;
 import de.gothaer.PersonDemo.Persistence.entities.Person;
@@ -43,6 +44,7 @@ public class PersonServiceImpl implements PersonService {
 
 	private void speichernImpl(Person person) throws PersonServiceException {
 		checkPerson(person);
+		person.setId(UUID.randomUUID().toString());
 		personRepository.save(person);
 	}
 
@@ -72,6 +74,14 @@ public class PersonServiceImpl implements PersonService {
 		
 		if(person.getNachname() == null || person.getNachname().length() < 2)
 			throw new PersonServiceException("lastname too short.");
+	}
+
+
+
+	@Override
+	public List<Person> findAllJohns() throws PersonServiceException {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
