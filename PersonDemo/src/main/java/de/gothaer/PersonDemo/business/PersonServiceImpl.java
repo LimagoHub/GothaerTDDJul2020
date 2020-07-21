@@ -2,6 +2,7 @@ package de.gothaer.PersonDemo.business;
 
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 import de.gothaer.PersonDemo.Persistence.PersonRepository;
 import de.gothaer.PersonDemo.Persistence.entities.Person;
@@ -80,8 +81,12 @@ public class PersonServiceImpl implements PersonService {
 
 	@Override
 	public List<Person> findAllJohns() throws PersonServiceException {
-		// TODO Auto-generated method stub
-		return null;
+		
+		try {
+			return personRepository.findAll().stream().filter(p->"John".equals(p.getVorname())).collect(Collectors.toList());
+		} catch (RuntimeException e) {
+			throw new PersonServiceException("upps", e);
+		}
 	}
 
 }

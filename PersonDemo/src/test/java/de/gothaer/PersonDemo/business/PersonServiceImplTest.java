@@ -14,6 +14,7 @@ import de.gothaer.PersonDemo.Persistence.PersonRepository;
 import de.gothaer.PersonDemo.Persistence.entities.Person;
 import static org.mockito.Mockito.*;
 
+import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.Assert.*;
@@ -150,5 +151,42 @@ public class PersonServiceImplTest {
 //		assertEquals(36, person.getId().length());
 //	}
 //
+	
+	@Test
+	public void findAllJohns_HappyDay_returnsListOfJohns() throws Exception{
+		// Arrange
+		List<Person> personen = Arrays.asList(
+				new Person("John", "Doe"),
+				new Person("John", "Rambo"),
+				new Person("John", "Wayne"),
+				new Person("John", "Wick"),
+				new Person("John", "McClain"),
+				new Person("John Boy", "Walton"),
+				new Person("Max", "Mustermann"));
+		when(personRepositoryMock.findAll()).thenReturn(personen);
+		
+		// Action
+		List<Person> allJohns = objectUnderTest.findAllJohns();
+		
+		// Assertion
+		assertEquals(5, allJohns.size());
+		for (Person person : allJohns) {
+			assertEquals("John", person.getVorname());
+		}
+		
+	}
+	
+	@Test(expected = PersonServiceException.class)
+	public void findAllJohns_RuntimeExceptionInUnderlyingService_ThrowsPersonenServiceException() throws Exception{
+		
+		when(personRepositoryMock.findAll()).thenThrow(new RuntimeException());
+		
+		// Action
+		objectUnderTest.findAllJohns();
+		
+		
+		
+	}
+	
 }
  
