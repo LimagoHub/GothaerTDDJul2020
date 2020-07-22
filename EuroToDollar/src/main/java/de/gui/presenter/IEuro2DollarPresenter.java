@@ -19,6 +19,6 @@ public interface IEuro2DollarPresenter {
 
 	public abstract void populateItems();
 	
-	public abstract void updateRechnenActionState();
+	public abstract void updateRechnenActionState(); // Nicht beachten
 
 }

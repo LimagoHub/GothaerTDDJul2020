@@ -8,7 +8,7 @@ public class Euro2DollarRechnerImpl implements IEuro2DollarRechner {
 	 */
 	@Override
 	public double calculateEuro2Dollar(double euro) {
-		
+		// zukünftig potentiell RuntimeException möglich
 		return euro * 1.1;
 	}
 
