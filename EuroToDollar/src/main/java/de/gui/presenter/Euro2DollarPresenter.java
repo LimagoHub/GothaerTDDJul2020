@@ -48,8 +48,7 @@ public class Euro2DollarPresenter implements IEuro2DollarPresenter {
 	@Override
 	public void rechnen() {
 		
-		
-		
+	
 	}
 	
 	/* (non-Javadoc)
@@ -65,9 +64,7 @@ public class Euro2DollarPresenter implements IEuro2DollarPresenter {
 	 */
 	@Override
 	public void populateItems() {
-		view.setDollar("" +0);
-		view.setEuro("" + 0);
-		updateRechnenActionState();
+		
 	}
 
 	@Override
